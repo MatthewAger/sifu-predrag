@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>JavaScript Progress Monitor</title>
+    <script type="text/javascript">
+        function getPercentProg() {
+            var myVideo = document.getElementsByTagName('video')[0];
+            var endBuf = myVideo.buffered.end(0);
+            var soFar = parseInt(((endBuf / myVideo.duration) * 100));
+            document.getElementById("loadStatus").innerHTML =  soFar + '%';
+        }
+       function myAutoPlay() {
+           var myVideo = document.getElementsByTagName('video')[0];
+           myVideo.play();
+       }
+       function addMyListeners(){
+           var myVideo = document.getElementsByTagName('video')[0];
+           myVideo.addEventListener('progress', getPercentProg, false);
+           myVideo.addEventListener('canplaythrough', myAutoPlay, false);
+       }
+    </script>
+</head>
+<body onload="addMyListeners()">
+    <div>
+        <video controls>
+            <source src="video/style1_mp4.m4v" type='video/mp4' />
+            <source src="video/style1_webm.webm" type='video/webm' />
+            <source src="video/style1_ogg.ogg" type='video/ogg' />
+        </video>
+        <p id="loadStatus">MOVIE LOADING...</p>
+    </div>
+</body>
+</html>
